@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Course Inquiry</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #060d1a;
+      --accent: #ff6b00;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 420px;
+      padding: 2rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 10px 40px rgba(0,0,0,.5);
+    }
+
+    /* BACK BUTTON */
+    .btn-back {
+      display: inline-block;
+      margin-bottom: 1.2rem;
+      font-size: .75rem;
+      letter-spacing: .08em;
+      color: var(--accent);
+      border: 1px solid rgba(255,107,0,.25);
+      background: rgba(255,107,0,.05);
+      padding: .35rem .9rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all .3s ease;
+    }
+
+    .btn-back:hover {
+      background: rgba(255,107,0,.12);
+      border-color: var(--accent);
+      box-shadow: 0 0 12px rgba(255,107,0,.2);
+      transform: translateY(-1px);
+    }
+
+    h2 {
+      font-family: 'Syne', sans-serif;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+    }
+
+    input, select {
+      width: 100%;
+      padding: .7rem;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.06);
+      color: #ffffff;
+      outline: none;
+      font-size: 14px;
+    }
+
+    input::placeholder {
+      color: rgba(255,255,255,.4);
+    }
+
+    /* FIX SELECT */
+    select {
+      appearance: none;
+    }
+
+    select option {
+      background: #0b1325;
+      color: #ffffff;
+    }
+
+    select:focus, input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 10px rgba(255,107,0,.3);
+    }
+
+    button.submit-btn {
+      width: 100%;
+      padding: .8rem;
+      border-radius: 50px;
+      border: none;
+      background: linear-gradient(135deg,#ff6b00,#ff8c3a);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button.submit-btn:hover {
+      box-shadow: 0 0 20px rgba(255,107,0,.5);
+      transform: translateY(-2px);
+    }
+
+    .success {
+      margin-top: 1rem;
+      font-size: .9rem;
+    }
+
+    .success.ok { color: #22c55e; }
+    .success.err { color: #ef4444; }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="form-container">
+
+    <!-- BACK BUTTON -->
+    <button class="btn-back" onclick="history.back()">
+      ← Back
+    </button>
+
+    <h2>Course Inquiry</h2>
+
+    <form id="inquiryForm">
+
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="text" name="mobile" placeholder="Mobile Number" required>
+      <input type="email" name="email" placeholder="Email" required>
+
+      <select name="course" required>
+        <option value="">Select Course</option>
+        <option value="Office Suite">Office Suite</option>
+        <option value="Fundamentals of AI">Fundamentals of AI</option>
+        <option value="AI Deep Dive">AI Deep Dive</option>
+      </select>
+
+      <select name="mode" required>
+        <option value="">Select Mode</option>
+        <option value="Online">Online</option>
+        <option value="Offline">Offline</option>
+      </select>
+
+      <input type="text" name="city" placeholder="City (optional)">
+      <input type="date" name="start" required>
+
+      <button type="submit" class="submit-btn">
+        Submit Inquiry
+      </button>
+
+      <div class="success" id="msg"></div>
+
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("inquiryForm");
+    const msg = document.getElementById("msg");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      data.status = "new";
+
+      msg.innerText = "Submitting...";
+      msg.className = "success";
+
+      try {
+        const res = await fetch("https://us-central1-code-neuron-website.cloudfunctions.net/api/inquiry", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+
+        await res.json();
+
+        msg.innerText = "Inquiry submitted successfully ✅";
+        msg.className = "success ok";
+
+        form.reset();
+
+      } catch (err) {
+        msg.innerText = "Something went wrong ❌";
+        msg.className = "success err";
+      }
+    });
+  </script>
+
+</body>
+</html>
