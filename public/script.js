@@ -17,6 +17,8 @@
 /* ── tiny helpers ──────────────────────────────────────────── */
 const $ = id => document.getElementById(id);
 const $$ = s => document.querySelectorAll(s);
+const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ============================================================
    1.  CUSTOM CURSOR
@@ -24,7 +26,7 @@ const $$ = s => document.querySelectorAll(s);
 (function initCursor () {
   const dot  = $('cursorDot');
   const ring = $('cursorRing');
-  if (!dot || !ring) return;
+  if (!dot || !ring || !hasFinePointer || prefersReducedMotion) return;
 
   let mx = 0, my = 0;
   let rx = 0, ry = 0;
@@ -81,19 +83,37 @@ const $$ = s => document.querySelectorAll(s);
   const links = $('navLinks');
   if (!btn || !links) return;
 
-  btn.addEventListener('click', () => {
-    const open = links.classList.toggle('open');
+  const desktopMedia = window.matchMedia('(min-width: 769px)');
+  const setMenuState = open => {
+    links.classList.toggle('open', open);
     btn.classList.toggle('active', open);
+    btn.setAttribute('aria-expanded', String(open));
     document.body.style.overflow = open ? 'hidden' : '';
+  };
+
+  btn.addEventListener('click', () => {
+    setMenuState(!links.classList.contains('open'));
   });
 
   links.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => {
-      links.classList.remove('open');
-      btn.classList.remove('active');
-      document.body.style.overflow = '';
+      setMenuState(false);
     });
   });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') setMenuState(false);
+  });
+
+  const closeOnDesktop = e => {
+    if (e.matches) setMenuState(false);
+  };
+
+  if (desktopMedia.addEventListener) {
+    desktopMedia.addEventListener('change', closeOnDesktop);
+  } else {
+    desktopMedia.addListener(closeOnDesktop);
+  }
 })();
 
 /* ============================================================
@@ -122,6 +142,10 @@ const $$ = s => document.querySelectorAll(s);
 (function initReveal () {
   const els = $$('.reveal-up,.reveal-left,.reveal-right');
   if (!els.length) return;
+  if (prefersReducedMotion) {
+    els.forEach(el => el.classList.add('visible'));
+    return;
+  }
 
   const obs = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -149,12 +173,13 @@ const $$ = s => document.querySelectorAll(s);
    ============================================================ */
 (function initHeroParticles () {
   const canvas = $('particleCanvas');
-  if (!canvas) return;
+  if (!canvas || prefersReducedMotion) return;
   const ctx = canvas.getContext('2d');
+  if (!ctx) return;
 
   let W, H, pts;
-  const N     = 90;
-  const CONN  = 120;
+  let particleCount = 90;
+  let connectionDistance = 120;
   const SPEED = 0.3;
   const MOUSE = { x: -999, y: -999 };
 
@@ -172,7 +197,9 @@ const $$ = s => document.querySelectorAll(s);
   function init () {
     W = canvas.width  = canvas.offsetWidth;
     H = canvas.height = canvas.offsetHeight;
-    pts = Array.from({ length: N }, mkPt);
+    particleCount = W < 768 ? 42 : 90;
+    connectionDistance = W < 768 ? 90 : 120;
+    pts = Array.from({ length: particleCount }, mkPt);
   }
 
   function tick () {
@@ -208,11 +235,11 @@ const $$ = s => document.querySelectorAll(s);
         const q = pts[j];
         const cdx = p.x - q.x, cdy = p.y - q.y;
         const cd  = Math.hypot(cdx, cdy);
-        if (cd < CONN) {
+        if (cd < connectionDistance) {
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(q.x, q.y);
-          ctx.strokeStyle = `rgba(255,107,0,${(1 - cd / CONN) * 0.2})`;
+          ctx.strokeStyle = `rgba(255,107,0,${(1 - cd / connectionDistance) * 0.2})`;
           ctx.lineWidth   = 0.7;
           ctx.stroke();
         }
@@ -222,11 +249,13 @@ const $$ = s => document.querySelectorAll(s);
     requestAnimationFrame(tick);
   }
 
-  window.addEventListener('mousemove', e => {
-    const r = canvas.getBoundingClientRect();
-    MOUSE.x = e.clientX - r.left;
-    MOUSE.y = e.clientY - r.top;
-  });
+  if (hasFinePointer) {
+    window.addEventListener('mousemove', e => {
+      const r = canvas.getBoundingClientRect();
+      MOUSE.x = e.clientX - r.left;
+      MOUSE.y = e.clientY - r.top;
+    });
+  }
 
   let rt;
   window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(init, 180); });
@@ -242,10 +271,12 @@ const $$ = s => document.querySelectorAll(s);
    ============================================================ */
 (function initAiBg () {
   const canvas = $('aiBgCanvas');
-  if (!canvas) return;
+  if (!canvas || prefersReducedMotion) return;
   const ctx = canvas.getContext('2d');
+  if (!ctx) return;
 
   let W, H, nodes;
+  let nodeCount = 60;
   let scrollY = 0;
   let targetScrollY = 0;
 
@@ -281,7 +312,8 @@ const $$ = s => document.querySelectorAll(s);
   function init () {
     W = canvas.width  = window.innerWidth;
     H = canvas.height = window.innerHeight;
-    nodes = Array.from({ length: 60 }, () => {
+    nodeCount = W < 768 ? 28 : 60;
+    nodes = Array.from({ length: nodeCount }, () => {
       const n = mkNode();
       n.baseY = n.y;
       return n;
@@ -394,7 +426,7 @@ const $$ = s => document.querySelectorAll(s);
    ============================================================ */
 (function initFloatParallax () {
   const floats = $$('.ai-float');
-  if (!floats.length) return;
+  if (!floats.length || prefersReducedMotion) return;
 
   let ticking = false;
 
@@ -437,7 +469,7 @@ const $$ = s => document.querySelectorAll(s);
 (function initCounters () {
   const stats   = $$('.stat-num');
   const numeric = [...stats].filter(s => /^\d/.test(s.textContent));
-  if (!numeric.length) return;
+  if (!numeric.length || prefersReducedMotion) return;
 
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -469,7 +501,7 @@ const $$ = s => document.querySelectorAll(s);
       if (!target) return;
       e.preventDefault();
       const top = target.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
+      window.scrollTo({ top, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
     });
   });
 })();
@@ -478,19 +510,21 @@ const $$ = s => document.querySelectorAll(s);
    12. SHOW MORE / SHOW LESS
    ============================================================ */
 (function initShowMore () {
-  $$('.btn-show-more').forEach(btn => {
-    const extra = btn.closest('.course-card').querySelector('.card-extra');
-    if (!extra) return;
+  $$('.btn-toggle-extra').forEach(btn => {
+    const card = btn.closest('.course-card');
+    const extra = card && card.querySelector('.card-extra');
+    const label = btn.querySelector('.btn-show-more-label');
+    if (!extra || !card || !label) return;
 
     btn.addEventListener('click', () => {
       const isOpen = extra.classList.toggle('open');
       btn.setAttribute('aria-expanded', String(isOpen));
-      btn.querySelector('.btn-show-more-label').textContent = isOpen ? 'Show Less' : 'Show More';
+      label.textContent = isOpen ? 'Show Less' : 'Show More';
 
       // Smooth scroll so card stays in view when collapsing
       if (!isOpen) {
         setTimeout(() => {
-          btn.closest('.course-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          card.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'nearest' });
         }, 100);
       }
     });
@@ -501,6 +535,7 @@ const $$ = s => document.querySelectorAll(s);
    13. CARD TILT  (subtle 3-D on mouse-move)
    ============================================================ */
 (function initTilt () {
+  if (!hasFinePointer || prefersReducedMotion) return;
   const cards = $$('.course-card,.contact-card');
   cards.forEach(card => {
     card.addEventListener('mousemove', e => {

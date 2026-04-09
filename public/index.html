@@ -3,108 +3,183 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Code Neuron Academy</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Code Neuron Academy | AI, Office, and Automation Courses</title>
+    <meta name="description"
+        content="Code Neuron Academy offers hands-on Microsoft Office, AI, Python, and automation courses for students, beginners, and future-ready learners." />
+    <meta name="keywords"
+        content="Code Neuron Academy, AI course, Microsoft Office course, Python course, automation training, student technology courses" />
+    <meta name="author" content="Code Neuron Academy" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#060d1a" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Code Neuron Academy | AI, Office, and Automation Courses" />
+    <meta property="og:description"
+        content="Learn Microsoft Office, AI fundamentals, Python, and automation through practical, future-focused training." />
+    <meta property="og:image" content="logo.jpeg" />
+    <meta property="og:locale" content="en_IN" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Code Neuron Academy | AI, Office, and Automation Courses" />
+    <meta name="twitter:description"
+        content="Hands-on technology courses in AI, Office, Python, and automation for modern digital learners." />
+    <meta name="twitter:image" content="logo.jpeg" />
+    <link rel="icon" type="image/jpeg" href="logo.jpeg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
         href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "EducationalOrganization",
+            "name": "Code Neuron Academy",
+            "description": "Hands-on Microsoft Office, AI, Python, and automation training for students, beginners, and future-ready learners.",
+            "sameAs": [
+                "https://instagram.com/codeneuron.academy"
+            ],
+            "contactPoint": [
+                {
+                    "@type": "ContactPoint",
+                    "telephone": "+91-90817-62566",
+                    "contactType": "customer support",
+                    "areaServed": "IN",
+                    "availableLanguage": [
+                        "English",
+                        "Hindi",
+                        "Gujarati"
+                    ]
+                },
+                {
+                    "@type": "ContactPoint",
+                    "telephone": "+91-85999-99866",
+                    "contactType": "customer support",
+                    "areaServed": "IN",
+                    "availableLanguage": [
+                        "English",
+                        "Hindi",
+                        "Gujarati"
+                    ]
+                },
+                {
+                    "@type": "ContactPoint",
+                    "telephone": "+91-94292-37801",
+                    "contactType": "WhatsApp support",
+                    "areaServed": "IN",
+                    "availableLanguage": [
+                        "English",
+                        "Hindi",
+                        "Gujarati"
+                    ]
+                }
+            ]
+        }
+    </script>
 </head>
 
 <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
     <!-- ===== GLOBAL AI CANVAS (fixed, parallax on scroll) ===== -->
-    <canvas id="aiBgCanvas"></canvas>
+    <canvas id="aiBgCanvas" aria-hidden="true"></canvas>
 
     <!-- ===== CUSTOM CURSOR ===== -->
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
+    <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+    <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
-    <!-- ===== NAVIGATION ===== -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-inner">
-            <a class="nav-logo" href="#home">
-                <span class="logo-bracket">&lt;</span>CNA<span class="logo-bracket">/&gt;</span>
-            </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#courses" class="nav-link">Courses</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </nav>
+    <header>
+        <!-- ===== NAVIGATION ===== -->
+        <nav class="navbar" id="navbar" aria-label="Primary">
+            <div class="nav-inner">
+                <a class="nav-logo" href="#home" aria-label="Code Neuron Academy">
+                    <img src="logo.jpeg" alt="Company Logo" class="brand-logo brand-logo-nav" />
+                </a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#courses" class="nav-link">Courses</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <button class="hamburger" id="hamburger" type="button" aria-label="Toggle menu"
+                    aria-controls="navLinks" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
 
-    <!-- ===== HERO SECTION ===== -->
-    <section class="hero" id="home">
-        <canvas id="particleCanvas"></canvas>
-        <div class="hero-grid-overlay"></div>
+        <!-- ===== HERO SECTION ===== -->
+        <section class="hero" id="home" aria-labelledby="hero-title">
+            <canvas id="particleCanvas" aria-hidden="true"></canvas>
+            <div class="hero-grid-overlay" aria-hidden="true"></div>
 
-        <!-- Floating AI icon elements inside Hero -->
-        <svg class="ai-float" style="width:70px;top:18%;left:6%;opacity:.3;animation:floatY 7s ease-in-out infinite"
-            viewBox="0 0 60 60" fill="none">
+            <!-- Floating AI icon elements inside Hero -->
+            <svg class="ai-float"
+                style="width:70px;top:18%;left:6%;opacity:.3;animation:floatY 7s ease-in-out infinite" viewBox="0 0 60 60"
+                fill="none" aria-hidden="true" focusable="false">
             <circle cx="30" cy="30" r="28" stroke="#ff6b00" stroke-width="1.2" stroke-dasharray="4 4" />
             <circle cx="30" cy="30" r="8" fill="rgba(255,107,0,.25)" stroke="#ff6b00" stroke-width="1" />
             <path d="M30 10v8M30 42v8M10 30h8M42 30h8" stroke="#ff6b00" stroke-width="1.2" stroke-linecap="round" />
-        </svg>
-        <svg class="ai-float"
-            style="width:55px;top:65%;left:88%;opacity:.25;animation:floatY 9s ease-in-out 1s infinite"
-            viewBox="0 0 50 50" fill="none">
+            </svg>
+            <svg class="ai-float"
+                style="width:55px;top:65%;left:88%;opacity:.25;animation:floatY 9s ease-in-out 1s infinite"
+                viewBox="0 0 50 50" fill="none" aria-hidden="true" focusable="false">
             <rect x="5" y="5" width="40" height="40" rx="6" stroke="#ff8c3a" stroke-width="1.2"
                 stroke-dasharray="3 3" />
             <path d="M15 25h20M25 15v20" stroke="#ff8c3a" stroke-width="1.5" stroke-linecap="round" />
-        </svg>
-        <svg class="ai-float"
-            style="width:44px;top:30%;left:92%;opacity:.2;animation:floatX 11s ease-in-out 2s infinite"
-            viewBox="0 0 44 44" fill="none">
+            </svg>
+            <svg class="ai-float"
+                style="width:44px;top:30%;left:92%;opacity:.2;animation:floatX 11s ease-in-out 2s infinite"
+                viewBox="0 0 44 44" fill="none" aria-hidden="true" focusable="false">
             <polygon points="22,3 41,38 3,38" stroke="#ff6b00" stroke-width="1.2" fill="rgba(255,107,0,.06)" />
             <circle cx="22" cy="28" r="3" fill="#ff6b00" />
-        </svg>
+            </svg>
 
-        <div class="hero-content">
-            <p class="hero-eyebrow reveal-up" data-delay="0">Welcome to the Future of Learning</p>
-            <h1 class="hero-title reveal-up" data-delay="120">
-                <span class="title-line">Code</span>
-                <span class="title-line accent">Neuron</span>
-                <span class="title-line">Academy</span>
-            </h1>
-            <p class="hero-tagline reveal-up" data-delay="240">Empowering Future Tech Minds</p>
-            <div class="hero-actions reveal-up" data-delay="360">
-                <a href="#courses" class="btn btn-primary">Explore Courses</a>
-                <a href="#about" class="btn btn-ghost">Learn More</a>
+            <div class="hero-content">
+                <p class="hero-eyebrow reveal-up" data-delay="0">Welcome to the Future of Learning</p>
+                <h1 class="hero-title reveal-up" data-delay="120" id="hero-title">
+                    <span class="title-line">Code</span>
+                    <span class="title-line accent">Neuron</span>
+                    <span class="title-line">Academy</span>
+                </h1>
+                <p class="hero-tagline reveal-up" data-delay="240">Future-Ready Courses for Students and Beginners</p>
+                <p class="hero-description reveal-up" data-delay="300">Learn Microsoft Office, AI fundamentals, Python,
+                    and automation through practical training built for modern digital learners.</p>
+                <div class="hero-actions reveal-up" data-delay="420">
+                    <a href="#courses" class="btn btn-primary">Explore Courses</a>
+                    <a href="#about" class="btn btn-ghost">Learn More</a>
+                </div>
             </div>
-        </div>
 
-        <div class="hero-scroll-hint">
-            <span>Scroll</span>
-            <div class="scroll-line"></div>
-        </div>
-    </section>
+            <div class="hero-scroll-hint" aria-hidden="true">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+    </header>
+
+    <main id="main-content">
 
     <!-- ===== ABOUT SECTION ===== -->
     <section class="about section" id="about">
 
         <!-- Floating AI elements -->
         <svg class="ai-float" data-speed="0.3" style="width:120px;top:5%;right:3%;opacity:.12" viewBox="0 0 100 100"
-            fill="none">
+            fill="none" aria-hidden="true" focusable="false">
             <circle cx="50" cy="50" r="48" stroke="#ff6b00" stroke-width=".8" stroke-dasharray="6 4" />
             <circle cx="50" cy="50" r="34" stroke="#ff6b00" stroke-width=".5" stroke-dasharray="3 5" />
             <circle cx="50" cy="50" r="18" stroke="#ff6b00" stroke-width=".8" fill="rgba(255,107,0,.04)" />
             <path d="M50 20v10M50 70v10M20 50h10M70 50h10" stroke="#ff6b00" stroke-width=".8" />
         </svg>
         <svg class="ai-float" data-speed="0.2" style="width:80px;bottom:10%;left:2%;opacity:.1" viewBox="0 0 80 80"
-            fill="none">
+            fill="none" aria-hidden="true" focusable="false">
             <rect x="4" y="4" width="72" height="72" rx="8" stroke="#ff8c3a" stroke-width=".8" stroke-dasharray="4 4" />
             <path d="M20 40h40M40 20v40" stroke="#ff8c3a" stroke-width="1" stroke-linecap="round" />
             <circle cx="40" cy="40" r="6" stroke="#ff8c3a" stroke-width=".8" fill="rgba(255,140,58,.08)" />
         </svg>
         <svg class="ai-float" data-speed="0.15" style="width:60px;top:50%;left:96%;opacity:.15" viewBox="0 0 60 60"
-            fill="none">
+            fill="none" aria-hidden="true" focusable="false">
             <path d="M30 5L55 50H5L30 5Z" stroke="#ff6b00" stroke-width=".9" fill="rgba(255,107,0,.05)" />
         </svg>
 
@@ -117,6 +192,7 @@
                 <div class="about-visual reveal-left">
                     <div class="about-orb">
                         <div class="about-orb-rings"></div>
+                        <img src="logo.jpeg" alt="Company Logo" class="brand-logo about-orb-logo" />
                     </div>
                     <div class="about-stats">
                         <div class="stat-card">
@@ -138,13 +214,13 @@
                     <p>Code Neuron Academy is a modern learning platform focused on empowering students with
                         future-ready technology skills. With a mission to build confident and skilled digital learners,
                         the academy offers structured courses in Microsoft Office, Artificial Intelligence, and
-                        automation tools. It is designed to support learners at every stage—from beginners, kids, and
+                        automation tools. It is designed to support learners at every stage, from beginners, kids, and
                         teens to advanced learners looking to deepen their technical knowledge.</p>
                     <p>At Code Neuron Academy, learning goes beyond theory. The curriculum is built around practical
                         training, hands-on projects, and real-world applications that help students truly understand and
-                        apply what they learn. Whether it's mastering Office tools for productivity or exploring AI
+                        apply what they learn. Whether it is mastering Office tools for productivity or exploring AI
                         concepts from fundamentals to advanced levels, students gain valuable skills that are relevant
-                        in today's fast-changing digital world.</p>      
+                        in today's fast-changing digital world.</p>
                 </div>
             </div>
         </div>
@@ -155,20 +231,20 @@
 
         <!-- Floating AI elements -->
         <svg class="ai-float" data-speed="0.25" style="width:100px;top:8%;left:1%;opacity:.1" viewBox="0 0 100 100"
-            fill="none">
+            fill="none" aria-hidden="true" focusable="false">
             <circle cx="50" cy="50" r="44" stroke="#ff6b00" stroke-width=".7" stroke-dasharray="5 3" />
             <path d="M30 50a20 20 0 0040 0 20 20 0 00-40 0" stroke="#ff6b00" stroke-width=".7" />
             <circle cx="50" cy="50" r="5" fill="rgba(255,107,0,.3)" />
         </svg>
         <svg class="ai-float" data-speed="0.35" style="width:72px;top:15%;right:2%;opacity:.12" viewBox="0 0 72 72"
-            fill="none">
+            fill="none" aria-hidden="true" focusable="false">
             <rect x="4" y="4" width="64" height="64" rx="10" stroke="#ff8c3a" stroke-width=".8" />
             <path d="M18 36h36M36 18v36" stroke="#ff8c3a" stroke-width="1" stroke-linecap="round" />
             <rect x="28" y="28" width="16" height="16" rx="4" stroke="#ff8c3a" stroke-width=".7"
                 fill="rgba(255,140,58,.07)" />
         </svg>
         <svg class="ai-float" data-speed="0.18" style="width:88px;bottom:5%;right:5%;opacity:.1" viewBox="0 0 88 88"
-            fill="none">
+            fill="none" aria-hidden="true" focusable="false">
             <polygon points="44,6 82,70 6,70" stroke="#ff6b00" stroke-width=".8" fill="rgba(255,107,0,.04)" />
             <polygon points="44,22 68,62 20,62" stroke="#ff6b00" stroke-width=".5" fill="none" />
         </svg>
@@ -176,7 +252,7 @@
         <div class="container">
             <div class="section-label reveal-up">What We Offer</div>
             <h2 class="section-title reveal-up">Our <span class="accent">Courses</span></h2>
-            <p class="section-sub reveal-up">Structured learning paths — from fundamentals to advanced mastery</p>
+            <p class="section-sub reveal-up">Structured learning paths from fundamentals to advanced mastery.</p>
 
             <div class="courses-grid">
 
@@ -216,16 +292,18 @@
                     <div class="card-tags">
                         <span>MS Word</span><span>MS Excel</span><span>PowerPoint</span>
                     </div>
-                    <button class="btn-show-more" aria-expanded="false">
-                        <span class="btn-show-more-label">Show More</span>
-                        <svg class="btn-show-more-icon" viewBox="0 0 20 20" fill="none">
-                            <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </button>
-                    <button class="btn-show-more btn-inquire" onclick="window.location.href='inquire.html'">
-                        <span class="btn-text">Inquire</span>
-                    </button>
+                    <div class="card-actions">
+                        <button class="btn-show-more btn-toggle-extra" type="button" aria-expanded="false">
+                            <span class="btn-show-more-label">Show More</span>
+                            <svg class="btn-show-more-icon" viewBox="0 0 20 20" fill="none">
+                                <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <a class="btn-show-more btn-inquire" href="inquire.html" aria-label="Inquire about Office Suite">
+                            <span class="btn-text">Inquire</span>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Card 2: Fundamentals of AI -->
@@ -256,7 +334,7 @@
                     <!-- Extra content (hidden by default) -->
                     <div class="card-extra">
                         <p class="card-desc">Students learn what AI is, how it works, and where it is used in real
-                            life—such as chatbots, recommendation systems, smart assistants, and more. The program
+                            life, such as chatbots, recommendation systems, smart assistants, and more. The program
                             covers key topics like machine learning basics, data understanding, and how AI makes
                             decisions.</p>
                         <p class="card-desc">By the end of the course, learners will have a strong foundation in AI
@@ -266,16 +344,19 @@
                     <div class="card-tags">
                         <span>Machine Learning</span><span>AI Tools</span><span>Real-World AI</span>
                     </div>
-                    <button class="btn-show-more" aria-expanded="false">
-                        <span class="btn-show-more-label">Show More</span>
-                        <svg class="btn-show-more-icon" viewBox="0 0 20 20" fill="none">
-                            <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </button>
-                    <button class="btn-show-more btn-inquire" onclick="window.location.href='inquire.html'">
-                        <span class="btn-text">Inquire</span>
-                    </button>
+                    <div class="card-actions">
+                        <button class="btn-show-more btn-toggle-extra" type="button" aria-expanded="false">
+                            <span class="btn-show-more-label">Show More</span>
+                            <svg class="btn-show-more-icon" viewBox="0 0 20 20" fill="none">
+                                <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <a class="btn-show-more btn-inquire" href="inquire.html"
+                            aria-label="Inquire about Fundamentals of AI">
+                            <span class="btn-text">Inquire</span>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Card 3: AI Deep Dive -->
@@ -304,25 +385,27 @@
                     <div class="card-extra">
                         <p class="card-desc">A key part of this program is learning Python for AI, which helps students
                             understand how to build and control intelligent systems. Students also dive into AI
-                            agents—learning how to design, create, and deploy smart agents that automate workflows and
+                            agents, learning how to design, create, and deploy smart agents that automate workflows and
                             solve real problems.</p>
                         <p class="card-desc">By the end of the AI Deep Dive program, students will have strong skills in
-                            AI tools, Python programming, automation, and agent development — equipped for future
+                            AI tools, Python programming, automation, and agent development, equipped for future
                             careers in technology and digital transformation.</p>
                     </div>
                     <div class="card-tags">
                         <span>Python</span><span>AI Agents</span><span>Automation</span>
                     </div>
-                    <button class="btn-show-more" aria-expanded="false">
-                        <span class="btn-show-more-label">Show More</span>
-                        <svg class="btn-show-more-icon" viewBox="0 0 20 20" fill="none">
-                            <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </button>
-                    <button class="btn-show-more btn-inquire" onclick="window.location.href='inquire.html'">
-                        <span class="btn-text">Inquire</span>
-                    </button>
+                    <div class="card-actions">
+                        <button class="btn-show-more btn-toggle-extra" type="button" aria-expanded="false">
+                            <span class="btn-show-more-label">Show More</span>
+                            <svg class="btn-show-more-icon" viewBox="0 0 20 20" fill="none">
+                                <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <a class="btn-show-more btn-inquire" href="inquire.html" aria-label="Inquire about AI Deep Dive">
+                            <span class="btn-text">Inquire</span>
+                        </a>
+                    </div>
                 </div>
 
             </div>
@@ -334,14 +417,14 @@
 
         <!-- Floating AI elements -->
         <svg class="ai-float" data-speed="0.22" style="width:90px;top:5%;left:2%;opacity:.1" viewBox="0 0 90 90"
-            fill="none">
+            fill="none" aria-hidden="true" focusable="false">
             <circle cx="45" cy="45" r="42" stroke="#ff6b00" stroke-width=".7" stroke-dasharray="5 4" />
             <circle cx="45" cy="45" r="28" stroke="#ff6b00" stroke-width=".5" stroke-dasharray="2 5" />
             <path d="M45 20v10M45 60v10M20 45h10M60 45h10" stroke="#ff6b00" stroke-width=".8" stroke-linecap="round" />
             <circle cx="45" cy="45" r="6" fill="rgba(255,107,0,.2)" />
         </svg>
         <svg class="ai-float" data-speed="0.28" style="width:65px;bottom:8%;right:3%;opacity:.12" viewBox="0 0 65 65"
-            fill="none">
+            fill="none" aria-hidden="true" focusable="false">
             <rect x="3" y="3" width="59" height="59" rx="7" stroke="#ff8c3a" stroke-width=".8" stroke-dasharray="4 3" />
             <path d="M20 32.5h25M32.5 20v25" stroke="#ff8c3a" stroke-width="1.1" stroke-linecap="round" />
         </svg>
@@ -349,7 +432,7 @@
         <div class="container">
             <div class="section-label reveal-up">Get In Touch</div>
             <h2 class="section-title reveal-up">Connect <span class="accent">With Us</span></h2>
-            <p class="section-sub reveal-up">Reach out through any of the channels below — we're happy to help!</p>
+            <p class="section-sub reveal-up">Reach out through any of the channels below. We are happy to help.</p>
 
             <div class="contact-grid">
 
@@ -380,7 +463,7 @@
                     </div>
                     <h4>WhatsApp</h4>
                     <p>+91 94292 37801</p>
-                    <a href="https://wa.me/919429237801" target="_blank" rel="noopener"
+                    <a href="https://wa.me/919429237801" target="_blank" rel="noopener noreferrer"
                         class="btn btn-primary btn-sm">Chat on WhatsApp</a>
                 </div>
 
@@ -395,7 +478,7 @@
                     </div>
                     <h4>Instagram</h4>
                     <p>@codeneuron.academy</p>
-                    <a href="https://instagram.com/codeneuron.academy" target="_blank" rel="noopener"
+                    <a href="https://instagram.com/codeneuron.academy" target="_blank" rel="noopener noreferrer"
                         class="btn btn-primary btn-sm">Follow Us</a>
                 </div>
 
@@ -403,13 +486,15 @@
         </div>
     </section>
 
+    </main>
+
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div class="footer-inner">
-            <a class="nav-logo" href="#home">
-                <span class="logo-bracket">&lt;</span>CNA<span class="logo-bracket">/&gt;</span>
+            <a class="nav-logo" href="#home" aria-label="Code Neuron Academy">
+                <img src="logo.jpeg" alt="Company Logo" class="brand-logo brand-logo-footer" />
             </a>
-            <p>© 2026 Code Neuron Academy. All Rights Reserved.</p>
+            <p>&copy; 2026 Code Neuron Academy. All Rights Reserved.</p>
         </div>
     </footer>
 
