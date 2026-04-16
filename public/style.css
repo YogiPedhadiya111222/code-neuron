@@ -292,7 +292,11 @@ button:focus-visible{
   letter-spacing:-.03em;
   margin-bottom:1.8rem;
 }
-.title-line{display:block}
+.title-line{
+  display:block;
+  max-width:100%;
+  overflow-wrap:anywhere;
+}
 .title-line.accent{
   color:var(--accent);
   text-shadow:
@@ -994,7 +998,12 @@ button:focus-visible{
     min-height:auto;
     padding:calc(7.5rem + env(safe-area-inset-top)) 1.5rem 4rem;
   }
-  .hero-title{font-size:clamp(3rem,14vw,5rem)}
+  .hero-title{
+    font-size:clamp(2.9rem,13vw,5rem);
+    line-height:.95;
+    letter-spacing:-.025em;
+  }
+  .hero-title .title-line:last-child{font-size:.88em}
   .hero-tagline{letter-spacing:.06em}
   .hero-description{margin-bottom:2.2rem}
   .hero-scroll-hint,.hero .ai-float{display:none}
@@ -1029,7 +1038,12 @@ button:focus-visible{
     padding:.35rem .9rem;
     margin-bottom:1.25rem;
   }
-  .hero-title{font-size:clamp(2.7rem,15vw,4.2rem)}
+  .hero-title{
+    font-size:clamp(2.15rem,13vw,3.7rem);
+    line-height:1;
+    margin-bottom:1.35rem;
+  }
+  .hero-title .title-line:last-child{font-size:.84em}
   .hero-actions{flex-direction:column;align-items:stretch}
   .hero-description{font-size:.95rem}
   .about-orb{width:180px;height:180px;padding:1rem}
